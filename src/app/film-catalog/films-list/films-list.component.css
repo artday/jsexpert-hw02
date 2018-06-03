@@ -1,0 +1,37 @@
+.example-card {
+    max-width: 300px;
+}
+
+.menu-card {
+  padding: 0px;
+}
+
+.menu-toolbar {
+  background-color: white;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.container, .film-item, .film-item{
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 15px auto;
+}
+.film-item{
+    max-width: 350px;
+    padding: 15px;
+}
+
+@media (min-width: 768px){
+    .container>.film-item{
+        flex-basis: calc(100%/3);
+    }
+}

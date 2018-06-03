@@ -1,22 +1,19 @@
 <mat-card class="menu-card">
-    
     <mat-toolbar class="menu-toolbar">
         <mat-toolbar-row>
-          <span>В избранное добавлено: 5 элементов</span>
-          <span class="example-spacer"></span>
+            <span>В избранное добавлено: 5 элементов</span>
+            <span class="example-spacer"></span>
             <div>
                 <mat-form-field>
-                  <mat-select placeholder="Сортировка">
-                    <mat-option [value]="ASC">По алфавиту: A-Z</mat-option>
-                    <mat-option [value]="DESC">По алфавиту: Z-A </mat-option>
-                  </mat-select>
+                    <mat-select placeholder="Сортировка">
+                        <mat-option [value]="ASC">По алфавиту: A-Z</mat-option>
+                        <mat-option [value]="DESC">По алфавиту: Z-A </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
         </mat-toolbar-row>
     </mat-toolbar>
-
 </mat-card>
-  
   
   <mat-grid-list cols="4" rowHeight="600px">
       <mat-grid-tile></mat-grid-tile>
@@ -39,4 +36,8 @@
       <mat-grid-tile></mat-grid-tile>
   </mat-grid-list>
 
-
+<div class="container">
+    <div class="film-item" *ngFor="let film of films">
+        <app-film-item [data]="film"></app-film-item>
+    </div>
+</div>
