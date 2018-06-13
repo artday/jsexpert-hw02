@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 // import { Observable, Subject } from 'rxjs';
 import { Film } from './film';
-import {FilmFavoritesService} from './film-favorites.service';
 
 
 @Injectable(
@@ -20,14 +19,10 @@ export class FilmService {
     /* Example from documentation angular.io */
     // new Film(7,'Film Tittle', '2017', 'https://google.com', 'Film Description'),
   ];
-  constructor(public favoritesService: FilmFavoritesService) {}
+  constructor() {}
 
   /* Films Getter */
   get Films() {
     return this.films;
-  }
-
-  get favorites(){
-    return this.favoritesService.all;
   }
 }

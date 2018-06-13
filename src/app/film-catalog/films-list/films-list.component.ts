@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation, EventEmitter } from '@angular/cor
 import {Film} from '../film';
 import { FilmService } from '../film.service';
 import {MatSelectChange} from '@angular/material';
+import {FilmFavoritesService} from "../film-favorites.service";
 
 @Component({
   selector: '.films',
@@ -10,8 +11,6 @@ import {MatSelectChange} from '@angular/material';
 })
 export class FilmsListComponent implements OnInit {
   films: Film[];
-  favorites;
-  favoriteCnt;
 
   /* sorting */
   selected: string;
@@ -21,7 +20,7 @@ export class FilmsListComponent implements OnInit {
     {value: 'desc', viewValue: 'По алфавиту: Z-A'}
   ];
 
-  constructor(private filmsService: FilmService) {}
+  constructor(private filmsService: FilmService, private favoritesService: FilmFavoritesService) {}
 
   doSort(value) {
     let key = 'name';
@@ -31,7 +30,7 @@ export class FilmsListComponent implements OnInit {
     this.films.sort(this.compareValues(key, value));
   }
 
-  // function for dynamic sorting
+  // sorting
   compareValues (key, order= 'asc') {
     return (a, b) => {
       if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
@@ -54,27 +53,22 @@ export class FilmsListComponent implements OnInit {
     };
   }
 
-  private favoriteTogle(event) {
-    if (event.favorite === true){
-      this.filmsService.favoritesService.set(event.id);
-      this.favoriteCnt += 1;
-    } else {
-      this.filmsService.favoritesService.remove(event.id);
-      this.favoriteCnt -= 1;
-    }
+  favoriteToggle(event) {
+    event.favorite ?
+      this.favoritesService.set(event.id):
+      this.favoritesService.remove(event.id);
   }
 
   isFavorite(id: number) {
-    return Boolean(this.favorites.find((obj) => obj.id === id));
+    return this.favoritesService.isFavorite(id);
+
   }
 
-  getFavoriteCnt(){
-    return this.filmsService.favoritesService.all.length;
+  favoriteCnt() {
+    return this.favoritesService.all.length;
   }
 
   ngOnInit() {
     this.films = this.filmsService.Films;
-    this.favorites = this.filmsService.favorites;
-    this.favoriteCnt = this.getFavoriteCnt();
   }
 }

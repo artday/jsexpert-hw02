@@ -21,9 +21,10 @@ export class FilmFavoritesService {
   }
 
   remove(id: number){
-    this.favorites = this.favorites.filter((el) => {
-      return el.id !== id;
-    });
+    this.favorites = this.favorites.filter((el) => el.id !== id);
   }
 
+  isFavorite(id: number) {
+    return Boolean(this.favorites.find((obj) => obj.id === id));
+  }
 }

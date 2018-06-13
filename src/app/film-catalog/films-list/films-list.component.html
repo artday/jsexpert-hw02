@@ -1,13 +1,12 @@
 <mat-card class="menu-card">
     <mat-toolbar class="menu-toolbar">
         <mat-toolbar-row>
-            <span *ngIf="favoriteCnt>0">В избранное добавлено: {{ favoriteCnt }} элементов</span>
+            <span>В избранное добавлено: {{ favoriteCnt() }} элементов</span>
             <span class="example-spacer"></span>
             <mat-form-field>
-                <mat-select
-                    [(value)]="selected"
-                    (selectionChange)="doSort(selected)"
+                <mat-select [(value)]="selected" (selectionChange)="doSort(selected)"
                     placeholder="Сортировка">
+
                     <mat-option *ngFor="let sort of sorting" [value]="sort.value">
                         {{ sort.viewValue }}
                     </mat-option>
@@ -20,6 +19,6 @@
 
 <div class="container">
     <div class="film-item" *ngFor="let film of films">
-        <app-film-item [data]="film" [favorite]="isFavorite(film.id)" (favoriteEmit)="favoriteTogle($event)"></app-film-item>
+        <app-film-item [data]="film" [favorite]="isFavorite(film.id)" (favoriteEmit)="favoriteToggle($event)"></app-film-item>
     </div>
 </div>
